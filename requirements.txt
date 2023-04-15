@@ -1,4 +1,3 @@
 pinecone-client
 langchain
 openai
-dotenv
