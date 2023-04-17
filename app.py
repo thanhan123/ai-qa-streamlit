@@ -5,7 +5,7 @@ import openai
 from langchain.llms import OpenAI
 
 # Set the title of the Streamlit app
-st.title("Mincolor AI Q&A")
+st.title("AI Q&A")
 
 @st.cache_resource
 def getPineconeIndex():
