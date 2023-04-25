@@ -40,7 +40,8 @@ def getCustomOpenAI():
   OPENAI_API_KEY = st.secrets.OPENAI_API_KEY
   return OpenAI(
     model_name="gpt-3.5-turbo",
-    openai_api_key=OPENAI_API_KEY
+    openai_api_key=OPENAI_API_KEY,
+    temperature=0.3
   )
 
 embed_model = "text-embedding-ada-002"
