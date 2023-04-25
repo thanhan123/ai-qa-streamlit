@@ -65,7 +65,7 @@ def startQuery(query):
 
   xq = query_embed['data'][0]['embedding']
 
-  res = pineconeIndex.query(xq, top_k=2, include_metadata=True)
+  res = pineconeIndex.query(xq, top_k=10, include_metadata=True)
   contexts = [item['metadata']['text'] for item in res['matches']]
   context = "\n\n---\n\n".join(contexts)+"\n\n-----\n\n"
 
