@@ -20,13 +20,14 @@ def getPineconeIndex():
 
 @st.cache_resource
 def getPromptTemplate():
-  template = """Answer the question based on the context below. If the
-question cannot be answered using the information provided answer
-with "I don't know". Answer in Japanese.
+  template = """Answer the request based on the context below. 
+If the request cannot be answered using the information provided answer with "I don't know".
+Give as much details as possible. 
+Answer in Japanese.
 
 Context: {context}
 
-Question: {query}
+Request: {query}
 
 Answer: """
 
