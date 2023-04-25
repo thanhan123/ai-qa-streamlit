@@ -82,9 +82,10 @@ def startQuery(query):
   response = custom_openai(prompt)
   st.text(query)
   st.success(response)
-  paths = ["minacolor.com/" + parseToURLPath(source) for source in sources]
+  paths = ["minacolor.com/" + parseToURLPath(source) for source in set(sources)]
   st.text("Reference links")
-  st.markdown(paths)
+  for path in paths:
+    st.markdown(path)
 
 if st.button("enter", type="primary"):
   startQuery(query)
