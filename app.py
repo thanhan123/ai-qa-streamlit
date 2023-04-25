@@ -51,6 +51,10 @@ query = st.text_input(
   placeholder = "Ask any medical question",
 )
 
+def parseToURLPath(name):
+  newName = name.split(".")[0]
+  return newName.replace("_", "/")
+
 st.cache()
 def startQuery(query):
   if len(query) == 0:
@@ -67,6 +71,7 @@ def startQuery(query):
   xq = query_embed['data'][0]['embedding']
 
   res = pineconeIndex.query(xq, top_k=10, include_metadata=True)
+  sources = [item['metadata']['source'] for item in res['matches']]
   contexts = [item['metadata']['text'] for item in res['matches']]
   context = "\n\n---\n\n".join(contexts)+"\n\n-----\n\n"
 
@@ -77,10 +82,14 @@ def startQuery(query):
   response = custom_openai(prompt)
   st.text(query)
   st.success(response)
+  paths = ["minacolor.com/" + parseToURLPath(source) for source in sources]
+  st.text("Reference links")
+  st.markdown(paths)
 
 if st.button("enter", type="primary"):
   startQuery(query)
 
+st.markdown('''===========================================================================''')
 st.markdown('''This AI Q&A has been build by about 40 articles from minacolor.com website.''')
 st.markdown('''
 For any question outside the knowledge of these articles the web will simply return: I don't know.
